@@ -1,0 +1,18 @@
+footer {
+  background-color: #1c2331
+}
+
+footer .top-section {
+  /*background-color: #6351ce*/
+}
+
+footer .bottom-section {
+  /*background-color: rgba(0, 0, 0, 0.2)*/
+}
+
+footer hr {
+  width: 60px; background-color: #7c4dff; height: 2px
+}
+footer .copyright{
+  /*background-color: rgba(0, 0, 0, 0.2)*/
+}
