@@ -16,3 +16,5 @@ footer hr {
 footer .copyright{
   /*background-color: rgba(0, 0, 0, 0.2)*/
 }
+footer a
+{text-decoration: none !important;}
