@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
 
 class Dashboard extends Component {
     state = {
@@ -52,18 +51,24 @@ class Dashboard extends Component {
         }
 
         return (
-            <div className="profile my-5">
+            <div className="container" id="content">
                 <div className="row">
                     <div className="col-sm-12">
-                        <div className="card">
-                            <div className="card-header text-white bg-danger">
-                                <h3 className="fw-bold mb-1">
-                                    Dashboard
-                                </h3>
-                            </div>
-                            <div className="card-body border border-danger">
-                                <div className="row">
-                                    {donations}
+                        <div className="profile my-5">
+                            <div className="row">
+                                <div className="col-sm-12">
+                                    <div className="card">
+                                        <div className="card-header text-white bg-danger">
+                                            <h3 className="fw-bold mb-1">
+                                                Dashboard
+                                            </h3>
+                                        </div>
+                                        <div className="card-body border border-danger">
+                                            <div className="row">
+                                                {donations}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

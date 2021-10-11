@@ -1,0 +1,22 @@
+.home .intro {
+    background-image: url("../img/home-intro-bg.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#content .row{
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+#content .row .col-sm-12{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.py-10{
+    padding-top: 10rem!important;
+    padding-bottom: 10rem!important;
+}

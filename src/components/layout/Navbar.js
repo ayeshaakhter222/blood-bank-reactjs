@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import bdrop from "../../assets/img/bdrop.png";
 import "../../assets/css/Navbar.css";
 import {Link, NavLink} from "react-router-dom";
+import Auth from "../Auth";
 
 class Navbar extends Component{
 
@@ -10,11 +11,60 @@ class Navbar extends Component{
     };
 
     state = {
-        roleDropdown: "!#",
-        userDropdown: "!#"
+        dropdownLink: "!#"
     };
 
     render() {
+        let registerNavLink, loginNavLink, userProfileNavLink, addDonationNavLink, dashboardNavLink,
+        roleNavLink;
+        if (!Auth.isAuthenticated()) {
+            loginNavLink = <li className="nav-item">
+                <Link to="/login" className="nav-link" aria-current="page">Login</Link>
+            </li>;
+
+            registerNavLink = <li className="nav-item">
+                <NavLink aria-current="page" to="/register" activeClassName="active" className="nav-link">Register</NavLink>
+            </li>;
+        } else {
+            const loggedUserInfo = Auth.getUserInfo();
+            userProfileNavLink = <ul className="navbar-nav">
+                <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href={this.state.dropdownLink} id="userDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        {loggedUserInfo.first_name + " " + loggedUserInfo.last_name}
+                    </a>
+                    <ul className="dropdown-menu bg-danger" aria-labelledby="userDropdown">
+                        <li className="">
+                            <Link to="/profile" className="dropdown-item" aria-current="page">Profile</Link>
+                        </li>
+                        <li className="">
+                            <button onClick={this.logout} className="dropdown-item" aria-current="page">Logout</button>
+                        </li>
+                    </ul>
+                </li>
+            </ul>;
+            addDonationNavLink = <li className="nav-item">
+                <NavLink to="/add-donate" className="nav-link" activeClassName="active" aria-current="page">Add Donation</NavLink>
+            </li>;
+            dashboardNavLink = <li className="nav-item">
+                <Link to="/dashboard" className="nav-link" aria-current="page">Dashboard</Link>
+            </li>;
+            roleNavLink = <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href={this.state.dropdownLink} id="roleDropdown" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false">
+                    Role
+                </a>
+                <ul className="dropdown-menu bg-danger" aria-labelledby="roleDropdown">
+                    <li className="">
+                        <Link to="/add-role" className="dropdown-item" aria-current="page">Add Role</Link>
+                    </li>
+                    <li className="">
+                        <Link to="/list-role" className="dropdown-item" aria-current="page">All Roles</Link>
+                    </li>
+                </ul>
+            </li>;
+        }
+
         return (
             <div className="top-nav">
                 <nav className="navbar navbar-expand-lg navbar navbar-dark bg-danger">
@@ -35,47 +85,12 @@ class Navbar extends Component{
                                 <li className="nav-item">
                                     <Link to="search-donor" className="nav-link" aria-current="page">Search Donor</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <NavLink to="/add-donate" className="nav-link" activeClassName="active" aria-current="page">Add Donation</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <NavLink aria-current="page" to="/register" activeClassName="active" className="nav-link">Register</NavLink>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/login" className="nav-link" aria-current="page">Login</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/dashboard" className="nav-link" aria-current="page">Dashboard</Link>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href={this.state.roleDropdown} id="roleDropdown" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        Role
-                                    </a>
-                                    <ul className="dropdown-menu bg-danger" aria-labelledby="roleDropdown">
-                                        <li className="">
-                                            <Link to="/add-role" className="dropdown-item" aria-current="page">Add Role</Link>
-                                        </li>
-                                        <li className="">
-                                            <Link to="/list-role" className="dropdown-item" aria-current="page">All Roles</Link>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href={this.state.userDropdown} id="userDropdown" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        User Name
-                                    </a>
-                                    <ul className="dropdown-menu bg-danger" aria-labelledby="userDropdown">
-                                        <li className="">
-                                            <Link to="/profile" className="dropdown-item" aria-current="page">Profile</Link>
-                                        </li>
-                                        <li className="">
-                                            <button onClick={this.logout} className="dropdown-item" aria-current="page">Logout</button>
-                                        </li>
-                                    </ul>
-                                </li>
+                                {addDonationNavLink}
+                                {loginNavLink}
+                                {registerNavLink}
+                                {dashboardNavLink}
                             </ul>
+                            {userProfileNavLink}
                         </div>
                     </div>
                 </nav>
